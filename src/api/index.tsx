@@ -1,2 +1,2 @@
-import callShips from "./starships";
-export { callShips };
+import starshipCall from "./starshipCall";
+export { starshipCall };
