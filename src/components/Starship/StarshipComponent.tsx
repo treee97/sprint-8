@@ -7,7 +7,6 @@ import { HttpStatusCode } from "axios";
 type StarshipProps = {
 	ship: shipType;
 	onClick?: () => void;
-	// itsFocused: boolean;
 };
 const Starship = ({ ship }: StarshipProps) => {
 	const [showData, setShowData] = useState<boolean>(false);
