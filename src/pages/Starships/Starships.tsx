@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Starship } from "../../components";
 import { starshipCall } from "../../api";
 import { shipType } from "../../types/types";
+import { logo } from "../../assets";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const Starships = () => {
@@ -26,11 +27,9 @@ const Starships = () => {
     const newPage = pages + 1;
     const additionalShips = await starshipCall(newPage);
     const results = additionalShips.results;
-    // const next = additionalShips.next;
 
-    console.log(pages);
-
-    console.log(additionalShips);
+    // console.log(pages);
+    // console.log(additionalShips);
 
     if (results.length === 0) {
       setHasMore(false);
@@ -46,7 +45,7 @@ const Starships = () => {
 
   return (
     <InfiniteScroll
-      dataLength={ships.length} //This is important field to render the next data
+      dataLength={ships.length}
       next={getMoreShips}
       hasMore={hasMore}
       loader={isLoading && <h4>Loading more ships...</h4>}
@@ -58,6 +57,7 @@ const Starships = () => {
     >
       <div>
         <h1>starships</h1>
+        <img src={logo} alt="" />
         {ships.map((ship, index) => (
           <Starship key={index} ship={ship} />
         ))}
