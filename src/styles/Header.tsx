@@ -51,4 +51,8 @@ export const NavbarLink = styled(Link)`
   color: gray;
   padding: 0.5rem;
   font-size: 1.5rem;
+  &:hover {
+    color: #e7e8eb;
+    text-shadow: 0 0 20px #fad000;
+  }
 `;

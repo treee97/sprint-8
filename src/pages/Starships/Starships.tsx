@@ -3,6 +3,7 @@ import { Starship } from "../../components";
 import { starshipCall } from "../../api";
 import { shipType } from "../../types/types";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Background } from "../../styles/Home";
 
 const Starships = () => {
   const [ships, setShips] = useState<shipType[]>([]);
@@ -43,19 +44,20 @@ const Starships = () => {
       dataLength={ships.length}
       next={getMoreShips}
       hasMore={hasMore}
-      loader={isLoading && <h4>Loading more ships...</h4>}
-      endMessage={
-        <p style={{ textAlign: "center" }}>
-          <b>Yay! You have seen it all</b>
-        </p>
-      }
+      loader={null}
+      // endMessage={
+      //   <p style={{ textAlign: "center" }}>
+      //     <b>Yay! You have seen it all</b>
+      //   </p>
+      // }
     >
-      <div>
-        <h1>starships</h1>
+      <Background>
         {ships.map((ship, index) => (
           <Starship key={index} ship={ship} />
         ))}
-      </div>
+        {isLoading && hasMore && <h2>Loading more ships...</h2>}
+        {!hasMore && <h2>Yay! You have seen it all</h2>}
+      </Background>
     </InfiniteScroll>
   );
 };

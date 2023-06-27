@@ -1,4 +1,5 @@
 import { logo, logo2, logo3 } from "../../assets";
+import { Link } from "react-router-dom";
 import {
   Image,
   LogoHeader,
@@ -17,7 +18,9 @@ const Header = () => {
           links here
         </div>
         <LogoHeader>
-          <Image src={logo3} alt="starwars_logo" />
+          <Link to="/">
+            <Image src={logo3} alt="starwars_logo" />
+          </Link>
         </LogoHeader>
 
         <LoginHeader>
