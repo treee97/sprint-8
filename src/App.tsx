@@ -12,24 +12,24 @@ import Register from "./pages/Register/Register";
 initializeApp(config.firebaseConfig);
 
 function App() {
-	return (
-		<BrowserRouter>
-			<Header />
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route
-					path="/starships"
-					element={
-						<AuthRoute>
-							<Starships />
-						</AuthRoute>
-					}
-				/>
-				<Route path="/login" element={<Login />} />
-				<Route path="/register" element={<Register />} />
-			</Routes>
-		</BrowserRouter>
-	);
+  return (
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/starships"
+          element={
+            <AuthRoute>
+              <Starships />
+            </AuthRoute>
+          }
+        />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
