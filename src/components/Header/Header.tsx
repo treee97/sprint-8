@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { logo, logo2, logo3 } from "../../assets";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut, User } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Image,
@@ -14,12 +14,17 @@ import {
 const Header = () => {
   const auth = getAuth();
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<{ email: string | null }>(() => ({
+    email: null,
+  }));
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-    });
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (user: firebase.User | null) => {
+        setUser(user);
+      }
+    );
 
     return () => unsubscribe();
   }, [auth]);

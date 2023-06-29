@@ -3,49 +3,58 @@ import { Background } from "../../styles/Home";
 import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import {
+  Form,
+  FormContainer,
+  FormInput,
+  FormItem,
+  FormButton,
+} from "../../styles/Login&Register";
 
 const Register = () => {
-	const auth = getAuth();
-	const navigate = useNavigate();
-	const [registering, setRegistering] = useState(false);
+  const auth = getAuth();
+  const navigate = useNavigate();
+  const [registering, setRegistering] = useState(false);
 
-	const handleRegister = async (event: any) => {
-		event.preventDefault();
-		const { name, email, password } = event.target.elements;
+  const handleRegister = async (event: any) => {
+    event.preventDefault();
+    const { name, email, password } = event.target.elements;
 
-		setRegistering(true);
-		try {
-			await createUserWithEmailAndPassword(auth, email.value, password.value);
-			console.log("Registration successful");
-			navigate("/login");
-		} catch (error) {
-			console.log(error);
-			setRegistering(false);
-		}
-	};
+    setRegistering(true);
+    try {
+      await createUserWithEmailAndPassword(auth, email.value, password.value);
+      console.log("Registration successful");
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+      setRegistering(false);
+    }
+  };
 
-	return (
-		<Background>
-			<h1>Register Now</h1>
-			<form onSubmit={handleRegister}>
-				<div>
-					<label htmlFor="name">Name</label>
-					<input type="text" name="name" id="name" required />
-				</div>
-				<div>
-					<label htmlFor="email">Email</label>
-					<input type="email" name="email" id="email" required />
-				</div>
-				<div>
-					<label htmlFor="password">Password</label>
-					<input type="password" name="password" id="password" required />
-				</div>
-				<button type="submit" disabled={registering}>
-					Register
-				</button>
-			</form>
-		</Background>
-	);
+  return (
+    <Background>
+      <FormContainer>
+        <h2>Register Now</h2>
+        <Form onSubmit={handleRegister}>
+          <FormItem>
+            <label htmlFor="name">Name</label>
+            <FormInput type="text" name="name" id="name" required />
+          </FormItem>
+          <FormItem>
+            <label htmlFor="email">Email</label>
+            <FormInput type="email" name="email" id="email" required />
+          </FormItem>
+          <FormItem>
+            <label htmlFor="password">Password</label>
+            <FormInput type="password" name="password" id="password" required />
+          </FormItem>
+          <FormButton type="submit" disabled={registering}>
+            Register
+          </FormButton>
+        </Form>
+      </FormContainer>
+    </Background>
+  );
 };
 
 export default Register;
