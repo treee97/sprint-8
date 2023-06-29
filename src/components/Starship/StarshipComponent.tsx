@@ -10,13 +10,17 @@ import {
 	Model_Class,
 	Crew_Length,
 	Pilots,
+	Films,
 } from "../../styles/StarshipComp";
+import { FilmsComponent } from "./FilmsComponent";
+import { PilotsComponent } from "./PilotsComponent";
 //https://fonts.google.com/specimen/Play
 //https://swapi.py4e.com/documentation#starships
 type StarshipProps = {
 	ship: shipType;
 	onClick?: () => void;
 };
+
 const Starship = ({ ship }: StarshipProps) => {
 	const [showData, setShowData] = useState<boolean>(false);
 
@@ -105,8 +109,22 @@ const Starship = ({ ship }: StarshipProps) => {
 								</div>
 							</Crew_Length>
 							<Pilots>
-								<TitleText>Pilots:</TitleText> {ship.pilots}
+								<TitleText>Pilots:</TitleText>
+
+								{ship.pilots.map((pilot, index) => {
+									const pilotUrl: string = pilot;
+									const pilotNum = pilotUrl.replace(/\D/g, "");
+									return <PilotsComponent key={index} pilotNum={pilotNum} />;
+								})}
 							</Pilots>
+							<Films>
+								<TitleText>Films:</TitleText>
+								{ship.films.map((film, index) => {
+									const filmUrl: string = film;
+									const filmNum = filmUrl.replace(/\D/g, "");
+									return <FilmsComponent key={index} filmNum={filmNum} />;
+								})}
+							</Films>
 						</div>
 					</>
 				)}

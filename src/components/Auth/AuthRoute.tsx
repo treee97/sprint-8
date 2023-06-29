@@ -6,35 +6,35 @@ import { useNavigate } from "react-router-dom";
 import { Background } from "../../styles/Home";
 
 export type typeProps = {
-  children: React.ReactNode;
+	children: React.ReactNode;
 };
 
 const AuthRoute = (props: typeProps) => {
-  const { children } = props;
+	const { children } = props;
 
-  const auth = getAuth();
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+	const auth = getAuth();
+	const navigate = useNavigate();
+	const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const unsubscribe = AuthCheck();
-    return () => unsubscribe();
-  }, [auth]);
+	useEffect(() => {
+		const unsubscribe = AuthCheck();
+		return () => unsubscribe();
+	}, [auth]);
 
-  const AuthCheck = () => {
-    return onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setLoading(false);
-      } else {
-        console.log("unauthorized");
-        navigate("/login");
-      }
-    });
-  };
+	const AuthCheck = () => {
+		return onAuthStateChanged(auth, (user) => {
+			if (user) {
+				setLoading(false);
+			} else {
+				console.log("unauthorized");
+				navigate("/login");
+			}
+		});
+	};
 
-  if (loading) return <Background>Loading ...</Background>;
+	if (loading) return <Background>Loading ...</Background>;
 
-  return <div>{children}</div>;
+	return <div>{children}</div>;
 };
 
 export default AuthRoute;
